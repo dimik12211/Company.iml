@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить пользователя</title>
+    <style>
+        a {
+            transition: all 500ms ease;
+        }
+
+        a:hover {
+            background: #222;
+            color: white;
+            border: 1px solid white;
+            box-shadow: inset 0 0 0 3px #3a7999;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #222;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+
+        details {
+            position: absolute;
+            left: 15px;
+            top: 50px;
+        }
+
+        :root {
+            --primColor: #dcdcdc;
+            --secoColor: #555555;
+            --cornerRad: 4px;
+        }
+
+        summary {
+            writing-mode: vertical-lr;
+            text-align: center;
+            padding: 12px 10px;
+            width: 23px;
+            height: 17px;
+            background-color: white;
+            border: 2px solid darkgrey;
+            border-radius: 4px;
+            color: black;
+            cursor: pointer;
+            user-select: none;
+            outline: none;
+            transition: transform 200ms ease-in-out 0s;
+        }
+
+        summary::before,
+        summary::after {
+            position: static;
+            top: 0;
+            left: 0;
+        }
+
+        summary::before {
+            content: "";
+        }
+
+        summary::after {
+            content: "III";
+            letter-spacing: -1px;
+        }
+
+        summary:hover {
+            transform: scale(1.1);
+        }
+
+        summary::marker {
+            font-size: 0;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] .menu {
+            animation-name: menuAnim;
+        }
+
+        details[open] summary::before {
+            content: "X";
+        }
+
+        details[open] summary::after {
+            content: "";
+        }
+
+        .menu {
+            width: 250px;
+            border-radius: 0px 30px 30px 30px;
+            background-color: rgba(0, 0, 0, 0.4);
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: hidden;
+            animation: closeMenu 300ms ease-in-out forwards;
+            border: 2px solid white;
+        }
+
+        .menu a {
+            padding: 12px 24px;
+            margin: 0 16px;
+            color: rgba(255, 255, 255, 0.9);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            text-align: center;
+            transition: filter 200ms linear 0s;
+            font-size: 18px;
+        }
+
+        .menu a:nth-of-type(1) {
+            padding-top: 24px;
+        }
+
+        .menu a:nth-last-of-type(1) {
+            border-bottom: none;
+        }
+
+        .menu a:hover {
+            filter: brightness(200%);
+        }
+
+        details[open]::before {
+            animation: fadeMe 300ms linear forwards;
+        }
+
+        @keyframes menuAnim {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: 500px;
+            }
+        }
+
+        @keyframes fadeMe {
+            0% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css');
+
+        * {
+            font-family: 'Open Sans', 'sans-serif', 'FontAwesome';
+        }
+
+        body {
+            background: rgb(52, 56, 61);
+            padding: 80px;
+        }
+
+        h1 {
+            color: rgb(255, 255, 255);
+            margin: 20px auto 0;
+            width: 300px;
+            text-align: center;
+        }
+
+        #wrapper {
+            position: absolute;
+            width: 320px;
+            left: 30%;
+            margin-left: -160px;
+            top: 35%;
+            margin-top: -75px;
+        }
+
+        #signin {
+            height: 90px;
+            width: 300px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        #signin::before {
+            display: block;
+            position: relative;
+            height: 2px;
+            background: rgb(52, 56, 61);
+            content: '';
+            top: 44px;
+            margin-left: 20px;
+            z-index: 1;
+        }
+
+        #signin input:first-of-type {
+            border-top-right-radius: 8px;
+            border-top-left-radius: 8px;
+        }
+
+        #signin input:last-of-type {
+            border-bottom-right-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        #signin input[type="text"], #signin input[type="password"], #signin button[type="submit"] {
+            background: rgb(28, 30, 33);
+            box-shadow: inset -100px -100px 0 rgb(28, 30, 33);
+            color: rgb(52, 56, 61);
+        }
+
+        #signin input[type="text"], #signin input[type="password"] {
+            position: relative;
+            display: block;
+            width: 280px;
+            height: 45px;
+            border: 0;
+            outline: 0;
+            top: -2px;
+            padding: 0 0 0 20px;
+            font-weight: 700;
+        }
+
+        #signin input[type="text"]:focus, #signin input[type="password"]:focus {
+            color: rgb(255, 255, 255);
+        }
+
+        #signin button[type="submit"] {
+            display: block;
+            position: absolute;
+            width: 52px;
+            height: 52px;
+            color: white;
+            border-radius: 50px;
+            outline: 0;
+            z-index: 2;
+            top: 19px;
+            right: -24px;
+            border: 6px solid rgb(52, 56, 61);
+            font-size: 25px;
+            text-indent: 0px;
+            padding-left: 9px;
+            padding-bottom: 3px;
+            text-align: center;
+        }
+
+        #signin button[type="submit"]:hover {
+            color: rgb(0, 126, 165);
+            text-shadow: 0 0 10px rgb(0, 126, 165);
+            cursor: pointer;
+        }
+
+        #signin p {
+            color: white; /*color: rgb(79, 85, 97);*/
+            padding: 0 20px;
+            font-weight: 700;
+            font-size: 12px;
+            margin: 10px 0 0 0;
+        }
+
+        #signin p > a {
+            color: rgb(111, 119, 135);
+            text-decoration: none;
+        }
+
+        #signin p > a:hover {
+            border-bottom: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <details>
+        <summary></summary>
+        <nav class="menu">
+            <a href="/admin/userManagement">Назад</a>
+            <a href="/admin">Консоль администратора</a>
+        </nav>
+    </details>
+    <div th:style="${Exception_TrueOrFalse}?'display:inline-block':'display:none'">
+        <h2 th:text="${Exception}"></h2>
+    </div>
+    <div id="wrapper">
+        <form id="signin" method="POST" action="/admin/userManagement/add">
+            <input type="text" placeholder="name" autofocus="true" name="name">
+            <input type="text" placeholder="surName" name="surName">
+            <button type="submit" name="userAdd">&#xf0da;</button>
+            <input type="text" placeholder="patronymic" name="patronymic">
+            <input type="text" placeholder="passportData" name="passportData">
+            <input type="text" placeholder="address" name="address">
+            <input type="text" placeholder="phoneNumber" name="phoneNumber">
+            <input type="text" placeholder="userName" name="userName">
+            <input type="password" placeholder="password" name="password">
+            <input type="password" placeholder="Confirm your password" name="passwordConfirm">
+        </form>
+    </div>
+    <div style="position: absolute; top: 25%; left: 55%;">
+        <div style="display: inline-block; text-align: center; vertical-align: middle">
+            <h3>Выберите роли</h3>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Имя роли</th>
+                </tr>
+                <tr th:each="Role : ${tableRole}">
+                    <form method="post">
+                        <td><input type="text" th:value="${Role.id}" name="id"
+                                   style="text-align: center; width: 20px; background: none; border: none; font-size: 20px; color: white">
+                        </td>
+                        <td th:text="${Role.name}"
+                            style="text-align: center; width: 20px; background: none; border: none; font-size: 20px; color: white"></td>
+                        <td>
+                            <button name="ButtonRow" type="submit">Добавить</button>
+                        </td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="position: absolute; top: 50%; left: 55%;">
+        <div style="text-align: center; vertical-align: middle" th:style="${TrueOrFalse}?'display:inline-block':'display:none'">
+            <h3>Выбранные роли</h3>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Имя роли</th>
+                </tr>
+                <tr th:each="Role : ${tableRoleSelect}">
+                    <form method="post">
+                        <td><input type="text" th:value="${Role.id}" name="id"
+                                   style="text-align: center; width: 20px; background: none; border: none; font-size: 20px; color: white">
+                        </td>
+                        <td th:text="${Role.name}"
+                            style="text-align: center; width: 20px; background: none; border: none; font-size: 20px; color: white"></td>
+                        <td>
+                            <button name="ButtonDeleteRow" type="submit">Удалить</button>
+                        </td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
